@@ -20,19 +20,19 @@ function LoginPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={handleUsernameChange} />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input type="password" value={password} onChange={handlePasswordChange} />
-      </label>
-      <br />
-      <button type="submit">Log in</button>
-    </form>
+    <><h1>Trippy</h1><form onSubmit={handleSubmit}>
+          <label>
+              Username:
+              <input type="text" value={username} onChange={handleUsernameChange} />
+          </label>
+          <br />
+          <label>
+              Password:
+              <input type="password" value={password} onChange={handlePasswordChange} />
+          </label>
+          <br />
+          <button type="submit">Log in</button>
+      </form></>
   );
 }
 
