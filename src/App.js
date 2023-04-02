@@ -1,7 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from "react";
+import LoginPage from "./login";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+  };
+
+  if (!loggedIn) {
+    return <LoginPage onLogin={handleLogin} />;
+  }
+
   return (
     <div className="App">
       <header className="App-header">
