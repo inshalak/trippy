@@ -1,12 +1,16 @@
 @import url("https://fonts.googleapis.com/css?family=Fredoka+One&display=swap");
 
+body {
+  background-color: #FFECD2;
+}
 
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    
+    margin-top: 50px;
   }
 
   h1 {
@@ -43,6 +47,12 @@ form {
   }
   
   button:hover {
-    background-color: #47c1f7;
+    background-color: #EDDDC8;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
   }
   

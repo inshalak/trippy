@@ -31,7 +31,11 @@ function LoginPage() {
               <input type="password" value={password} onChange={handlePasswordChange} />
           </label>
           <br />
-          <button type="submit">Log in</button>
+          <ul>
+            <li><button type="submit">Log in</button> <button type="submit">Register</button></li>
+            
+          </ul>
+          
       </form></>
   );
 }
