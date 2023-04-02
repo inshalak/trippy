@@ -32,7 +32,7 @@ function LoginPage() {
           </label>
           <br />
           <ul>
-            <li><button type="submit">Log in</button> <button type="submit">Register</button></li>
+            <li><button type="submit">Log in</button> <button type="register">Register</button></li>
             
           </ul>
           
