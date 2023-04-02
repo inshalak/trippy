@@ -2,9 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from "react";
 import LoginPage from "./login";
+import RegisterPage from "./register";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [registering, setRegistering] = useState(false);
 
   const handleLogin = () => {
     setLoggedIn(true);
@@ -14,8 +16,20 @@ function App() {
     setLoggedIn(false);
   };
 
+  const handleRegister = () => {
+    setRegistering(true);
+  };
+
+  const handleBackToLogin = () => {
+    setRegistering(false);
+  }
+
   if (!loggedIn) {
-    return <LoginPage onLogin={handleLogin} />;
+    if (!registering) {
+      return <LoginPage onLogin={handleLogin} onRegister={handleRegister} />;
+    } else {
+      return <RegisterPage onBackToLogin={handleBackToLogin} />;
+    }
   }
 
   return (

@@ -1,43 +1,63 @@
-import React, { useState } from "react";
-import './login.css';
+import { useState } from "react";
+import RegisterPage from "./register";
 
+function LoginPage(props) {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
 
-function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const handleLogin = () => {
+    setLoggedIn(true);
+  };
 
-  function handleUsernameChange(event) {
-    setUsername(event.target.value);
-  }
+  const handleLogout = () => {
+    setLoggedIn(false);
+  };
 
-  function handlePasswordChange(event) {
-    setPassword(event.target.value);
-  }
+  const handleShowRegisterForm = () => {
+    setShowRegisterForm(true);
+  };
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    // handle login logic here
-  }
+  const handleHideRegisterForm = () => {
+    setShowRegisterForm(false);
+  };
 
-  return (
-    <><h1>Trippy</h1><form onSubmit={handleSubmit}>
+  if (!loggedIn && !showRegisterForm) {
+    return (
+      <div>
+        <h1>Trippy</h1>
+        <form onSubmit={handleLogin}>
           <label>
-              Username:
-              <input type="text" value={username} onChange={handleUsernameChange} />
+            Username:
+            <input type="text" />
           </label>
           <br />
           <label>
-              Password:
-              <input type="password" value={password} onChange={handlePasswordChange} />
+            Password:
+            <input type="password" />
           </label>
           <br />
-          <ul>
-            <li><button type="submit">Log in</button> <button type="register">Register</button></li>
-            
-          </ul>
-          
-      </form></>
-  );
+          <div style={{ display: "flex" }}>
+            <button type="submit">Log in</button>
+            <button onClick={handleShowRegisterForm}>Register</button>
+          </div>
+        </form>
+      </div>
+    );
+  } else if (!loggedIn && showRegisterForm) {
+    return (
+      <RegisterPage
+        onLogin={handleLogin}
+        onHideRegisterForm={handleHideRegisterForm}
+      />
+    );
+  } else {
+    return (
+      <div>
+        <p>You are logged in.</p>
+        <button onClick={handleLogout}>Log out</button>
+      </div>
+    );
+  }
 }
 
 export default LoginPage;
