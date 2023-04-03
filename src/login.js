@@ -1,5 +1,6 @@
 import { useState } from "react";
 import RegisterPage from "./register";
+import ItineraryPage from "./itinerary";
 
 function LoginPage(props) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -52,10 +53,12 @@ function LoginPage(props) {
     );
   } else {
     return (
-      <div>
-        <p>You are logged in.</p>
-        <button onClick={handleLogout}>Log out</button>
-      </div>
+      // <div>
+      //   <p>You are logged in.</p>
+      //   <button onClick={handleLogout}>Log out</button>
+      // </div>
+      // TODO: This should be a home page
+      <ItineraryPage></ItineraryPage>
     );
   }
 }
