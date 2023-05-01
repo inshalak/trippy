@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import './register.css';
+import { useNavigate } from "react-router-dom";
+import LoginPage from "./login";
 
 function RegisterPage() {
+  const navigate = useNavigate()
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +26,9 @@ function RegisterPage() {
     // handle registration logic here
   }
 
+  function handleBackButton(event) {
+  }
+
   return (
     <div>
       <h1>Trippy</h1>
@@ -42,6 +48,8 @@ function RegisterPage() {
           <input type="password" value={password} onChange={handlePasswordChange} />
         </label>
         <br />
+        <button onClick={handleBackButton}>Back</button>
+        <br></br>
         <button type="submit">Register</button>
       </form>
     </div>
