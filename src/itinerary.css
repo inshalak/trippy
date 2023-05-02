@@ -80,12 +80,15 @@ ul {
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
 
 .card {
-  background-color: #fff;
+  background-color: #e99f0ba8;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin-bottom: 20px;
+  margin-right: 10px;
+  width: 100px;
+  align-content: center;
 }
 
 .card-body {
@@ -111,13 +114,13 @@ body {
 }
 
 .container {
-  background: #232931;
-  width: 540px;
-  height: flex;
+  background: #FFECD2;
+  width: 100vw;
   margin: 0 auto;
   position: relative;
-  margin-top: 10%;
   box-shadow: 2px 5px 20px rgba(119, 119, 119, 0.5);
+  overflow-y: scroll;
+  height: 100vh;
 }
 
 .leftbox {
@@ -126,7 +129,7 @@ body {
   position: absolute;
   width: 15%;
   height: 110%;
-  background-color: #50d890;
+  background-color: #CF5C09;
   box-shadow: 3px 3px 15px rgba(119, 119, 119, 0.5);
 }
 
@@ -145,7 +148,7 @@ nav a {
 
 .rightbox {
   padding: 0em 34rem 0em 0em;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .rb-container {
@@ -183,7 +186,7 @@ nav a {
   content: " ";
   border: 8px solid rgba(255, 255, 255, 1);
   border-radius: 500%;
-  background: #50d890;
+  background: #CF5C09;
   height: 20px;
   width: 20px;
   transition: all 500ms ease-in-out;
@@ -195,7 +198,6 @@ nav a {
 }
 
 ul.rb li .timestamp {
-  color: #50d890;
   position: relative;
   width: 100px;
   font-size: 12px;
@@ -237,10 +239,58 @@ ul.rb li .timestamp {
 
 input::placeholder {
   padding: 5em 5em 1em 1em;
-  color: #50d890;
+  color: #CF5C09;
 }
 
 .horizontal-cards {
   display: flex;
   flex-direction: row;
+  align-items: center;
+}
+
+.horizontal-button {
+  width: fit-content;
+  height: fit-content; 
+}
+
+.header-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  position: sticky;
+  top: 0;
+  background-color: #CF5C09;
+  z-index: 1;
+}
+
+.bottom-buttons {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  margin-bottom: 30px;
+}
+
+.resolved-btn {
+  background-color: rgb(243, 141, 7);
+}
+
+.unresolved-btn {
+  background-color: red
+}
+
+.edit-button {
+  font-size: 0.8em;
+  padding: 0.2em 0.5em;
+  border-radius: 3px;
+  background-color: black;
+  height: fit-content;
+}
+
+.horizontal-button-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

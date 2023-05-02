@@ -4,47 +4,81 @@ import ReactDOM from 'react-dom';
 import { render } from '@testing-library/react';
 
 
+
+
+const cardData = [
+  [
+    {
+      date: '3rd May 2020',
+      time: '7:00 AM',
+      title: 'South Beach',
+      description: 'This place is warm and famous for ice creams',
+      resolved: false
+    }
+  ],
+  [
+    {
+      date: '3rd May 2020',
+      time: '10:00 AM',
+      title: 'Alpaine Museum',
+      description: 'National museum of historical figures in Bahamas',
+      resolved: false
+    }
+  ],
+]
+
 function ItineraryPage(props) {
-  const [itineraryName, setItineraryName] = useState("");
+  const [itineraryName, setItineraryName] = useState("Bahamas");
   const [e1Resolved, setE1Resolved] = useState(false);
   const [e2Resolved, setE2Resolved] = useState(false);
+  const [showForm0, setShowForm0] = useState(false);
   const [showForm1, setShowForm1] = useState(false);
   const [showForm2, setShowForm2] = useState(false);
+  const [newTime, setNewTime] = useState("")
   const [newTitle, setNewTitle] = useState("")
   const [newDescription, setNewDescription] = useState("")
 
-  const Card = ({ title, content, resolved = true }) => (
-    <div style={{ width: '100px', margin: '10px', padding: '20px', border: '1px solid black' }}>
+
+  const date = '3rd May 2020'
+  const times = ['7:00 AM', '10:00 AM', '12:00 PM', '1:40 PM', '3:00 PM', '5:00 PM', '6:45 PM', '7:00 PM']
+  const titles = ['South Beach', 'Alpaine Museum', 'Bahamian Rapsody', 'Mountain Polo']
+  const descriptions = [
+    'This place is warm and famous for ice creams',
+    'History Museum of 20th century Bahamas',
+    'Famous live jam Club with tons of vibarnt music',
+    'The most famous mountain in Bahama'
+  ]
+
+  const Card = ({ date, time, title, description, resolved = false }) => (
+    // <div style={{ width: '100px', margin: '10px', padding: '20px', border: '1px solid black' }}>
+    <div class='card'>
+      <div class="timestamp">
+        {date}<br/>{time}
+      </div>
       <h2>{title}</h2>
-      <p>{content}</p>
-      <button>{resolved ? 'resolved' : 'need resolve'}</button>
+      <p>{description}</p>
+      <button class={resolved ? 'resolved-btn' : 'unresolved-btn'}>{resolved ? 'resolved' : 'need resolve'}</button>
     </div>
   );
 
-  const cardData = [
-    [
-      {
-        title: 'card 1',
-        description: 'card 1 desc'
-      }
-    ],
-    [
-      {
-        title: 'card 2',
-        description: 'card 2 desc'
-      }
-    ],
-    [
-      {
-        title: 'card 3',
-        description: 'card 3 desc'
-      }
-    ]
-  ]
+
+  function handleItineraryName(event) {
+    setItineraryName(event.target.value)
+  }
 
   function handleResolve(event) {
-    setE1Resolved(!e1Resolved);
-    setE2Resolved(!e2Resolved);
+    const index = event.target.id
+    const hcards = cardData[index]
+
+    hcards.forEach(card => card.resolved = true)
+    
+    renderCards()
+  }
+
+  function handleFormSubmit0(event) {
+    event.preventDefault();
+    // handle form submission logic here
+    setShowForm0(false);
   }
 
   function handleFormSubmit1(event) {
@@ -58,12 +92,25 @@ function ItineraryPage(props) {
     event.preventDefault();
     // handle form submission logic here
 
-    const newCard = {
+    const testCard = [{
+      date,
+      time: newTime,
       title: newTitle,
       description: newDescription
-    }
-    addVerticalCard()
+    }]
+    cardData.push(testCard)
+    // console.log(cardData)
+    // addVerticalCard()
+
+    renderCards()
     setShowForm2(false);
+  }
+
+  function handleItineraryName(event) {
+    setItineraryName(event.target.value)
+  }
+  function handleEventNewTime(event) {
+    setNewTime(event.target.value)
   }
 
   function handleEventNewTitle(event) {
@@ -80,10 +127,18 @@ function ItineraryPage(props) {
         {cardData.map((cards, index) => (
           <li class="rb-item" ng-repeat="itembx">
             <div class="horizontal-cards" id='hcards'>
-              {cards.map((card) => (
-                <Card title="Island" content="this is the detail about island" resolved={true}></Card>
+              {cards.map((card, horizontalIndex) => (
+                              <Card 
+                              date={cardData[index][horizontalIndex].date} 
+                              time={cardData[index][horizontalIndex].time} 
+                              title={cardData[index][horizontalIndex].title} 
+                              description={cardData[index][horizontalIndex].description} 
+                              resolved={cardData[index][horizontalIndex].resolved} />
               ))}
-              <button onClick={addHorizontalCard}>Add</button>
+              <div class="horizontal-button-group">
+                <button class="horizontal-button" onClick={addHorizontalCard} id={index}>Add</button>
+                <button class="horizontal-button" onClick={handleResolve} id={index}>Resolve</button>
+              </div>
             </div>
          </li>
         ))}
@@ -93,10 +148,13 @@ function ItineraryPage(props) {
   }
 
   const addHorizontalCard = (event) => {
+    const index = Math.floor(Math.random() * 4)
     const newCard = {
-      title: 'add',
-      description: 'te'
-    }
+      date,
+      time: cardData.at(event.target.id)[0].time,
+      title: titles[index],
+      description: descriptions[index]
+    } 
     cardData.at(event.target.id).push(newCard)
 
     renderCards()
@@ -104,170 +162,121 @@ function ItineraryPage(props) {
   }
 
   function addVerticalCard() {
+    const index = Math.floor(Math.random() * 4)
     const testCard = [{
-      title: 'test',
-      description: 'test description'
+      date,
+      time: times[cardData.length],
+      title: titles[index],
+      description: descriptions[index]
     }]
     cardData.push(testCard)
 
     renderCards()
   }
 
-  // return (
-  //   <div>
-  //     <div style={{ display: 'flex', alignContent: 'center', flexDirection: 'row' }}>
-  //       <h1>Bahamas</h1>
-  //     </div>
-  //     <div id="test">
-  //       <Card
-  //         title="Card 1"
-
-  //       />
-  //       <Card
-  //         title="Card 2"
-
-  //       />
-  //       <Card
-  //         title="Card 3"
-
-  //       />
-  //     </div>
-  //     <div style={{ display: 'flex', alignContent: 'center', flexDirection: 'column' }}>
-  //       <Card title="South Beach" content="this is the detail about south beach"></Card>
-  //       <button onClick={handleResolve}>Resolve!</button>
-  //       <div style={{ display: 'flex', flexDirection: 'row' }}>
-  //         <Card title="Island" content="this is the detail about island" resolved={e1Resolved}></Card>
-  //         <Card title="Smoothie Cafe" content="this is the detail about smoothie cafe" resolved={e2Resolved}></Card>
-  //       </div>
-  //     </div>
-      // {showForm1 && (
-      //   <div className="form-popup">
-      //     <form className="form" onSubmit={handleFormSubmit1}>
-      //       <label>Name:</label>
-      //       <input type="text" />
-      //       <br />
-      //       <label>Link:</label>
-      //       <input type="text" />
-      //       <br />
-      //       <label>Question:</label>
-      //       <select>
-      //         <option value="q1">What are you most excited about doing here?</option>
-      //         <option value="q2">Question 2</option>
-      //         <option value="q3">Question 3</option>
-      //       </select>
-      //       <br />
-      //       <label>Answer:</label>
-      //       <textarea></textarea>
-      //       <br />
-      //       <button type="submit">Submit</button>
-      //     </form>
-      //   </div>
-      // )}
-      // {showForm2 && (
-      //   <div className="form-popup">
-      //     <form className="form" onSubmit={handleFormSubmit2}>
-      //       <label>Name:</label>
-      //       <input type="text" />
-      //       <br />
-      //       <label>Description:</label>
-      //       <textarea></textarea>
-      //       <br />
-      //       <button type="submit">Submit</button>
-      //     </form>
-      //   </div>
-      // )}
-      // {!showForm1 && (
-      //   <button onClick={() => setShowForm1(true)}>Add Link!</button>
-      // )}
-      // {!showForm2 && (
-      //   <button onClick={() => setShowForm2(true)}>Add Event!</button>
-      // )}
-  //   </div>
-  // )
   return (
     <div class="container">
+      <div class="header-text">
+        <h1>{itineraryName}</h1>
+        {!showForm0 && (
+            <button class="edit-button"onClick={() => setShowForm0(true)}>Edit</button>
+        )}
+      </div>
       <div class="rightbox">
         <div class="rb-container">
           <ul class="rb" id="cards">
             <li class="rb-item" ng-repeat="itembx">
-              <div class="card">
-                <div class="timestamp">
-                  3rd May 2020 7:00 PM
+              <div class="horizontal-cards" id='hcards'>
+                <Card 
+                    date={cardData[0][0].date} 
+                    time={cardData[0][0].time} 
+                    title={cardData[0][0].title} 
+                    description={cardData[0][0].description} 
+                    resolved={cardData[0][0].resolved} />
+                <div class="horizontal-button-group">
+                  <button class="horizontal-button" onClick={addHorizontalCard} id={0}>Add</button>
+                  <button class="horizontal-button" onClick={handleResolve} id={0}>Resolve</button>
                 </div>
-                <div class="card-body">
-                  <div class="item-title">Chris Serrano posted a photo on your wall.</div>
-                </div>
+                  
+
               </div>
             </li>
             <li class="rb-item" ng-repeat="itembx">
-              <div class="card">
-                <div class="timestamp">
-                  19th May 2020 3:00 PM
-                </div>
-                <div class="card-body">
-                  <div class="item-title">Mia Redwood commented on your last post.</div>
-                </div>
-              </div>
-            </li>
-            <li class="rb-item" ng-repeat="itembx">
-              <div class="card">
-                <div class="timestamp">
-                  17st June 2020 7:00 PM
-                </div>
-                <div class="card-body">
-                  <div class="item-title">Lucas McAlister just send you a message.</div>
+              <div class="horizontal-cards" id='hcards'>
+                <Card 
+                  date={cardData[1][0].date} 
+                  time={cardData[1][0].time} 
+                  title={cardData[1][0].title} 
+                  description={cardData[1][0].description} 
+                  resolved={cardData[1][0].resolved} />
+                <div class="horizontal-button-group">
+                  <button class="horizontal-button" onClick={addHorizontalCard} id={0}>Add</button>
+                  <button class="horizontal-button" onClick={handleResolve} id={0}>Resolve</button>
                 </div>
               </div>
-            </li>
-              
+            </li>          
           </ul>
-          <button onClick={addVerticalCard}>button</button>
-          {showForm1 && (
-        <div className="form-popup">
-          <form className="form" onSubmit={handleFormSubmit1}>
-            <label>Name:</label>
-            <input type="text" />
-            <br />
-            <label>Link:</label>
-            <input type="text" />
-            <br />
-            <label>Question:</label>
-            <select>
-              <option value="q1">What are you most excited about doing here?</option>
-              <option value="q2">Question 2</option>
-              <option value="q3">Question 3</option>
-            </select>
-            <br />
-            <label>Answer:</label>
-            <textarea></textarea>
-            <br />
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-      )}
-      {showForm2 && (
-        <div className="form-popup">
-          <form className="form" onSubmit={handleFormSubmit2}>
-            <label>Name:</label>
-            <input type="text" onChange={handleEventNewTitle}/>
-            <br />
-            <label>Description:</label>
-            <input type="text" onChange={handleEventNewDescription}/>
-            <br />
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-      )}
-      {!showForm1 && (
-        <button onClick={() => setShowForm1(true)}>Add Link!</button>
-      )}
-      {!showForm2 && (
-        <button onClick={() => setShowForm2(true)}>Add Event!</button>
-      )}
         </div>
       </div>
+      <div class='buttom-buttons'>
+            {/* <button onClick={addVerticalCard}>button</button> */}
+            {showForm0 && (
+            <div className="form-popup">
+              <form className="form" onSubmit={handleFormSubmit0}>
+                <label>Itinerary Name:</label>
+                <input type="text" value={itineraryName} onChange={handleItineraryName}/>
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          )}
+            {showForm1 && (
+            <div className="form-popup">
+              <form className="form" onSubmit={handleFormSubmit1}>
+                <label>Name:</label>
+                <input type="text" />
+                <br />
+                <label>Link:</label>
+                <input type="text" />
+                <br />
+                <label>Question:</label>
+                <select>
+                  <option value="q1">What are you most excited about doing here?</option>
+                  <option value="q2">Question 2</option>
+                  <option value="q3">Question 3</option>
+                </select>
+                <br />
+                <label>Answer:</label>
+                <textarea></textarea>
+                <br />
+                <button type="submit">Submit</button>
+              </form>
+            </div>  
+          )}
+          {showForm2 && (
+            <div className="form-popup">
+              <form className="form" onSubmit={handleFormSubmit2}>
+                <label>Time:</label>
+                <input type="text" onChange={handleEventNewTime}/>
+                <br />
+                <label>Title:</label>
+                <input type="text" onChange={handleEventNewTitle}/>
+                <br />
+                <label>Description:</label>
+                <input type="text" onChange={handleEventNewDescription}/>
+                <br />
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          )}
+          {!showForm1 && (
+            <button onClick={() => setShowForm1(true)}>Add Link!</button>
+          )}
+          {!showForm2 && (
+            <button onClick={() => setShowForm2(true)}>Add Event!</button>
+          )}
+          </div>
     </div>
-    )
+  )
 }
 
 export default ItineraryPage;

@@ -51,7 +51,7 @@ button {
 }
 
 button:hover {
-  background-color: #EDDDC8;
+  background-color: hsl(34, 56%, 51%);
 }
 
 ul {
