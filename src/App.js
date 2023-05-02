@@ -1,8 +1,10 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import { useState } from "react";
 import LoginPage from "./login";
 import RegisterPage from "./register";
+import TripPage from "./trip";  // import your TripPage component
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -24,31 +26,22 @@ function App() {
     setRegistering(false);
   }
 
-  if (!loggedIn) {
-    if (!registering) {
-      return <LoginPage onLogin={handleLogin} onRegister={handleRegister} />;
-    } else {
-      return <RegisterPage onBackToLogin={handleBackToLogin} />;
-    }
-  }
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={
+          registering
+            ? <RegisterPage onBackToLogin={handleBackToLogin} loggedIn={loggedIn} onLogin={handleLogin} />
+            : <LoginPage onLogin={handleLogin} onRegister={handleRegister} loggedIn={loggedIn} />
+        } />
+        <Route path="/trip" element={<TripPage onLogout={handleLogout} loggedIn={loggedIn} />} />
+        <Route path="*" element={
+          registering
+            ? <RegisterPage onBackToLogin={handleBackToLogin} loggedIn={loggedIn} onLogin={handleLogin} />
+            : <LoginPage onLogin={handleLogin} onRegister={handleRegister} loggedIn={loggedIn} />
+        } />
+      </Routes>
+    </Router>
   );
 }
 

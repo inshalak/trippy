@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css?family=Fredoka+One&display=swap");
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #FFECD2;
+  font-family: Arial, sans-serif;
+}
+
+div {
+  text-align: center;
+}
+
+.tag-button,
+.idea-button {
+  margin: 0.5em;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  border: none;
+  border-radius: 2em;
+  background-color: #CF5C09;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tag-button:hover,
+.idea-button:hover {
+  background-color: #CF5C09;
+}
+
+input[type="text"] {
+  margin: 0.5em;
+  padding: 0.5em;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 2em;
+  width: 200px;
+}
+
+button {
+  margin: 0.5em;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  border: none;
+  border-radius: 2em;
+  background-color: #CF5C09;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1e7e34;
+}
+
+.trip-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.tag-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+label{
+  color: #4b2012;
+  font-size: 24px;
+  font-family: 'Fredoka One', sans-serif;
+  
+}
+
+
+
+
+
+
+
+
