@@ -13,6 +13,23 @@ div {
   text-align: center;
 }
 
+.bubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: #CF5C09;
+  padding: 10px;
+}
+
+.bubble svg {
+  color: white;
+  width: 15px;
+  vertical-align: middle;
+}
+
+
+
 .tag-button,
 .idea-button {
   margin: 0.5em;
@@ -53,7 +70,7 @@ button {
 }
 
 button:hover {
-  background-color: #1e7e34;
+  background-color: #594343;
 }
 
 .trip-container {
@@ -82,10 +99,29 @@ label{
   
 }
 
+h1{
+
+  display: flex;
+  align-items: center;
+  color: #4b2012;
+  font-size: 40px;
+  font-family: 'Fredoka One', sans-serif;
+}
 
 
+.tag-button.marked-for-delete {
+  display: none;
+}
 
+.tag-button.dragging {
+  background-color: #ccc;
+  opacity: 0.5;
+}
 
-
+.img {
+  width: 10px;
+  height: 10px;
+  object-fit: contain;
+}
 
 
