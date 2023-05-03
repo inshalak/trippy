@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from "react";
 import LoginPage from "./login";
+import HomePage from "./home";
 import RegisterPage from "./register";
 import TripPage from "./trip";  // import your TripPage component
 
@@ -35,6 +36,7 @@ function App() {
             : <LoginPage onLogin={handleLogin} onRegister={handleRegister} loggedIn={loggedIn} />
         } />
         <Route path="/trip" element={<TripPage onLogout={handleLogout} loggedIn={loggedIn} />} />
+        <Route path="/home" element={<HomePage onLogout={handleLogout} loggedIn={loggedIn} />} />
         <Route path="*" element={
           registering
             ? <RegisterPage onBackToLogin={handleBackToLogin} loggedIn={loggedIn} onLogin={handleLogin} />

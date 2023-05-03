@@ -105,36 +105,38 @@ function TripPage() {
 </svg>
 </div> </h1>
 
- <div className="input-group">
-        <label>tags</label>
-        <div className="tag-group">
-        {tags.map((tag, index) => (
-  <button
-    key={index}
-    className="tag-button"
-    draggable="true"
-    onDragEnd={(event) => handleTagDragEnd(event, index)}
-  >
-    {tag}
-  </button>
-))}
-          {showTagInput ? (
-            <div>
-              <input type="text" value={newTag} placeholder="Add Tag" onChange={handleNewTagChange} />
-              <button onClick={handleAddTag}>Add</button>
-            </div>
-          ) : (
-            <button onClick={() => setShowTagInput(true)}>+</button>
-          )}
-        </div>
+ 
+<div className="input-group">
+  <label>tags</label>
+  <div className="tag-container">
+    {tags.map((tag, index) => (
+      <button
+        key={index}
+        className="tag-button"
+        draggable="true"
+        onDragEnd={(event) => handleTagDragEnd(event, index)}
+      >
+        {tag}
+      </button>
+    ))}
+    {showTagInput ? (
+      <div>
+        <input type="text" value={newTag} placeholder="Add Tag" onChange={handleNewTagChange} />
+        <button onClick={handleAddTag}>Add</button>
       </div>
+    ) : (
+      <button onClick={() => setShowTagInput(true)}>+</button>
+    )}
+  </div>
+</div>
+
       <div className="input-group">
         <label>ideas</label>
         <div>
           {ideas.map((idea, index) => (
             <button key={index} className="idea-button" draggable = "true" 
             onDragStart={() => setDraggedIdeaIndex(index)}
-            style = {{display: "flex"}} onDragOver={(event) => {
+           onDragOver={(event) => {
               event.preventDefault();
               setDroppedIdeaIndex(index);
             }} onDragEnd={() => {

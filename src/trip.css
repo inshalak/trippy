@@ -24,14 +24,13 @@ div {
 
 .bubble svg {
   color: white;
-  width: 15px;
   vertical-align: middle;
 }
 
-
-
 .tag-button,
 .idea-button {
+  display: flex;
+  flex-direction: column;
   margin: 0.5em;
   padding: 0.5em 1em;
   font-size: 1em;
@@ -70,7 +69,7 @@ button {
 }
 
 button:hover {
-  background-color: #594343;
+  background-color: #1e7e34;
 }
 
 .trip-container {
@@ -88,6 +87,7 @@ button:hover {
 
 .tag-group {
   display: flex;
+  flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -113,15 +113,6 @@ h1{
   display: none;
 }
 
-.tag-button.dragging {
-  background-color: #ccc;
-  opacity: 0.5;
-}
 
-.img {
-  width: 10px;
-  height: 10px;
-  object-fit: contain;
-}
 
 
