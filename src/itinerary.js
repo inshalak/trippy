@@ -1,6 +1,7 @@
 import { useState, useSyncExternalStore } from 'react';
 import './itinerary.css';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
 
@@ -182,6 +183,9 @@ function ItineraryPage(props) {
             <button class="edit-button"onClick={() => setShowForm0(true)}>Edit</button>
         )}
       </div>
+      <Link to="/trip">
+        <button class="trip-button">About Trip</button>
+      </Link>
       <div class="rightbox">
         <div class="rb-container">
           <ul class="rb" id="cards">
